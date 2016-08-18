@@ -7,4 +7,8 @@ gulp.task('clean:dist', () => {
   return del.sync(paths.dist.root);
 });
 
-gulp.task('clean', ['clean:dist']);
+gulp.task('clean:compiled-content', () => {
+  return del.sync(paths.app.compiledContent);
+});
+
+gulp.task('clean', ['clean:dist', 'clean:compiled-content']);
