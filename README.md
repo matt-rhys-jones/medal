@@ -16,6 +16,7 @@ Simple Markdown Static Site Generator written in ES6
 - `lint` - runs linting against JS files
 - `clean` - cleans the dist directory
 - `compile` - compiles the site into the `dist` directory
+- `test` - tests the Medal app javascript
 
 # Preview
 Run `http-server dist` from the root folder and navigate to http://localhost:8080
