@@ -1,29 +1,7 @@
 {% extends "base.html" %}
 
-{% block header %}
-  <header>
-    <p>Header</p>
-  </header>
-{% endblock %}
-
 {% block content %}
-  {% for item in index %}
-    <div>
-      <h2>
-        <a href="{{ item.path }}" title="{{ item.metadata.title }}">{{ item.metadata.title }}</a>
-      </h2>
-      <p>{{ item.metadata.intro }}</p>
-    </div>
-  {% else %}
-    <div>
-      <p>No content found</p>
-    </div>
-  {% endfor %}
-
+  <h1>Home</h1>
+  <span><a href="/articles.html" title="articles">Articles</a></span>
 {% endblock %}
 
-{% block footer %}
-  <footer>
-    Footer
-  </footer> 
-{% endblock %}
