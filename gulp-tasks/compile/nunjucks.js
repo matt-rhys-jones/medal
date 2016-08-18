@@ -32,6 +32,10 @@ gulp.task('compile:nunjucks', ['compile:content', 'compile:index'], () => {
   glob.push(paths.app.layout + '/**/*.html');
   glob.push('!' + paths.app.layout + '/base.html');
 
+  nunjucksConfig.content.sort((a, b) => {
+    return new Date(b.metadata.date) - new Date(a.metadata.date);
+  });
+
   gulp.src(glob)
     .pipe(nunjucks.compile(nunjucksConfig))
     .pipe(gulp.dest('dist'))
