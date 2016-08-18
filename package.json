@@ -6,6 +6,8 @@
   "author": "Matthew Rhys Jones",
   "license": "ISC",
   "devDependencies": {
+    "babel-plugin-istanbul": "^2.0.0",
+    "babel-plugin-transform-es2015-modules-umd": "^6.12.0",
     "babel-preset-es2015": "^6.13.2",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
@@ -21,6 +23,8 @@
     "highlight.js": "^9.6.0",
     "karma": "^1.2.0",
     "karma-babel-preprocessor": "^6.0.1",
+    "karma-chai": "^0.1.0",
+    "karma-coverage": "^1.1.1",
     "karma-mocha": "^1.1.1",
     "karma-phantomjs-launcher": "^1.0.1",
     "nunjucks": "^2.4.2"
