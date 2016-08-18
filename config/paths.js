@@ -9,6 +9,7 @@ export default {
     root: 'gulp-tasks'
   },
   app: {
-    root: 'app'
+    root: 'app',
+    layout: 'app/layout'
   }
 }

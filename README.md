@@ -5,7 +5,9 @@ Simple Markdown Static Site Generator written in ES6
 - `./app` - contains application code used when generating the static site
 - `./config` - contains configuration used by gulp tasks during builds
 - `./gulp-tasks` - a suite of gulp tasks used in order to build the site
+- `./content` - markdown articles should be placed here
 
 # Gulp Tasks
 - `lint` - runs linting against JS files
 - `clean` - cleans the dist directory
+- `compile` - compiles the site
