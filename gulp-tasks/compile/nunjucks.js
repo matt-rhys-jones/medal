@@ -9,7 +9,10 @@ const frontMatter = require('gulp-front-matter');
 
 const nunjucksConfig = {
   paths: {
-    css: '/css/styles.css'
+    css: {
+      medal: '/css/styles.css',
+      highlight: '/css/highlight/default.css'
+    }
   },
   index: [] // populated by compile:index task
 };

@@ -3,7 +3,8 @@ export default {
     root: 'config'
   },
   dist: {
-    root: 'dist'
+    root: 'dist',
+    css: 'dist/css'
   },
   gulp: {
     root: 'gulp-tasks'

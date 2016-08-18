@@ -27,5 +27,5 @@ sourcemapping enabled, whereas production builds will not.
 
 To enable development/production environments:
 
-On Windows - `set NODE_ENV=[production/development]`
-On *nix - `export NODE_ENV=[production/development]`
+- Windows - `set NODE_ENV=[production/development]`
+- *nix - `export NODE_ENV=[production/development]`
