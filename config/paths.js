@@ -16,6 +16,11 @@ export default {
     compiledContent: 'app/layout/content'
   },
   content: {
-    root: 'content'
+    draft: {
+      root: 'content/draft'
+    },
+    publish: {
+      root: 'content/publish'
+    }
   }
 }

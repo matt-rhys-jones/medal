@@ -4,16 +4,15 @@ const gulp = require('gulp');
 const less = require('gulp-less');
 const sourcemaps = require('gulp-sourcemaps');
 const path = require('path');
- 
-const glob = [];
-
-glob.push(paths.app.css + '**/*.less');
 
 gulp.task('compile:less', () => {
+  const glob = [];
   const env = process.env.NODE_ENV;
   const config = {
     paths: [ path.join(__dirname, 'less', 'includes') ]
-  }
+  };
+
+  glob.push(paths.app.css + '**/*.less');
 
   if (env === 'production') {
     return gulp.src(glob)

@@ -19,7 +19,12 @@ const nunjucksConfig = {
 
 gulp.task('compile:index', () => {
   const glob = [];
-  glob.push(paths.content.root + '/**/*.md');
+
+  glob.push(paths.content.publish.root + '/**/*.md');
+
+  if (process.env.NODE_ENV === 'development') {
+    glob.push(paths.content.draft.root + '/**/*.md');
+  }
 
   return gulp.src(glob)
     .pipe(frontMatter())
@@ -33,6 +38,7 @@ gulp.task('compile:index', () => {
 
 gulp.task('compile:nunjucks', ['compile:content', 'compile:index'], () => {
   const glob = [];
+
   glob.push(paths.app.layout + '/**/*.html');
   glob.push('!' + paths.app.layout + '/base.html');
 
