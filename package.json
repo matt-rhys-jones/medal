@@ -4,5 +4,14 @@
   "description": "Markdown Static Site Generator ",
   "main": "index.js",
   "author": "Matthew Rhys Jones",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.13.2",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-marked": "^1.0.0",
+    "gulp-nunjucks": "^2.2.0",
+    "nunjucks": "^2.4.2"
+  }
 }
