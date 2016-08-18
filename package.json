@@ -1,0 +1,8 @@
+{
+  "name": "medal",
+  "version": "0.0.1",
+  "description": "Markdown Static Site Generator ",
+  "main": "index.js",
+  "author": "Matthew Rhys Jones",
+  "license": "ISC"
+}
