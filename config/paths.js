@@ -10,6 +10,7 @@ export default {
   },
   app: {
     root: 'app',
-    layout: 'app/layout'
+    layout: 'app/layout',
+    css: 'app/css'
   }
 }
