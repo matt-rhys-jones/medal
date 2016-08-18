@@ -7,7 +7,20 @@
 {% endblock %}
 
 {% block content %}
-  <p>Content</p>
+
+  {% for item in content %}
+    <div>
+      <h2>
+        <a href="{{ item.path }}" title="{{ item.metadata.title }}">{{ item.metadata.title }}</a>
+      </h2>
+      <p>{{ item.metadata.intro }}</p>
+    </div>
+  {% else %}
+    <div>
+      <p>No content found</p>
+    </div>
+  {% endfor %}
+
 {% endblock %}
 
 {% block footer %}
