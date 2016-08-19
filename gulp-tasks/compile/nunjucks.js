@@ -10,7 +10,7 @@ const frontMatter = require('gulp-front-matter');
 
 const nunjucksConfig = {
   paths: {
-    css: '/css/style.min.css'
+    css: '/css/min/style.min.css'
   },
   index: [] // populated by compile:index task
 };
