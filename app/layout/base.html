@@ -1,20 +1,62 @@
+{% from 'macros/container.html' import container %}
 <!DOCTYPE html>
 
 <html>
   <head>
     {% block head %}
+      <link rel="stylesheet" href="{{ paths.css.normalize }}" />
+      <link rel="stylesheet" href="{{ paths.css.skeleton }}" />
       <link rel="stylesheet" href="{{ paths.css.medal }}" />
       <link rel="stylesheet" href="{{ paths.css.highlight }}" />
+      <base href="/" />
     {% endblock %}
   <head>
   <body>
     {% block header %}
-      <header>Header</header>
+      <header class="header">
+        {% call container() %}
+          <div class="row">
+            <div class="header__branding five columns">
+              <span class="header__brand">
+                <a href="/index.html" title="home">Medal</a>
+              </span>
+              <span class="header__tag">Minimal ES6 Static Blog Generator</span>
+            </div>
+
+            <nav class="header__nav seven columns">
+              <ul class="primary-nav">
+                <li class="primary-nav__item">
+                  <a href="/index.html" title="home" class="primary-nav__link">Home</a>
+                </li>
+                <li class="primary-nav__item">
+                  <a href="/articles.html" title="articles" class="primary-nav__link">Articles</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        {% endcall %}
+      </header>
     {% endblock %}
-    {% block content %}
-    {% endblock %}
+
+    <div class="content">
+    {% call container() %}
+      <div class="row">
+          <div class="twelve columns">
+            {% block content %}
+            {% endblock %}
+          </div>
+      </div>
+    {% endcall %}
+    </div>
+
     {% block footer %}
-      <footer>Footer</footer>
+      <footer class="footer">
+        {% call container() %}
+          <div class="row">
+            <span class="footer__brand">Made With Medal</span>
+          </div>
+        {% endcall %}
+      </footer>
     {% endblock %}
   </body>
 </html>

@@ -2,19 +2,18 @@
 
 {% block content %}
   <h1>Articles</h1>
-  <span><a href="/index.html" title="Home">Home</a></span>
       
-  {% for item in index %}
-    <div>
-      <h2>
-        <a href="{{ item.path }}" title="{{ item.metadata.title }}">{{ item.metadata.title }}</a>
-      </h2>
-      <p>{{ item.metadata.intro }}</p>
-    </div>
-  {% else %}
-    <div>
-      <p>No content found</p>
-    </div>
-  {% endfor %}
+  <div class="articles">
+    {% for item in index %}
+      <article class="articles__article">
+        <h2 class="articles__article_title"><a href="{{ item.path }}" title="{{ item.metadata.title }}">{{ item.metadata.title }}</a></h2>
+        <p class="articles__article_intro">{{ item.metadata.intro }}</p>
+      </article>
+    {% else %}
+      <div>
+        <p>No content found</p>
+      </div>
+    {% endfor %}
+  </div>
 
 {% endblock %}

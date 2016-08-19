@@ -10,6 +10,8 @@ const frontMatter = require('gulp-front-matter');
 const nunjucksConfig = {
   paths: {
     css: {
+      normalize: '/css/normalize.css',
+      skeleton: '/css/skeleton.css',
       medal: '/css/styles.css',
       highlight: '/css/highlight/default.css'
     }

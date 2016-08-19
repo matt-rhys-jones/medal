@@ -30,5 +30,8 @@
     "karma-mocha": "^1.1.1",
     "karma-phantomjs-launcher": "^1.0.1",
     "nunjucks": "^2.4.2"
+  },
+  "dependencies": {
+    "skeleton-css": "^2.0.4"
   }
 }

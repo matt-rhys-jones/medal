@@ -5,4 +5,4 @@ import './compile/highlight';
 
 const gulp = require ('gulp');
 
-gulp.task('compile', ['clean', 'compile:nunjucks', 'compile:less', 'compile:content', 'compile:highlight']);
+gulp.task('compile', ['clean', 'vendor', 'compile:nunjucks', 'compile:less', 'compile:content', 'compile:highlight']);
