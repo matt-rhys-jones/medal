@@ -5,7 +5,7 @@ const less = require('gulp-less');
 const sourcemaps = require('gulp-sourcemaps');
 const path = require('path');
 
-gulp.task('compile:less', () => {
+gulp.task('compile:less', ['pre-compile'], () => {
   const glob = [];
   const env = process.env.NODE_ENV;
   const config = {

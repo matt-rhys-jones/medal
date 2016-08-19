@@ -1,4 +1,5 @@
 import paths from '../../config/paths';
+import settings from '../../config/settings';
 import DateSorter from '../../medal/js/modules/date-sorter/date-sorter';
 
 const path = require('path');
@@ -6,6 +7,11 @@ const gulp = require('gulp');
 const nunjucks = require('gulp-nunjucks');
 const data = require('gulp-data');
 const frontMatter = require('gulp-front-matter');
+let highlightCssPath = '';
+
+if (settings.features.highlight.enabled) {
+  highlightCssPath = '/css/highlight/' + settings.features.highlight.theme + '.css';
+}
 
 const nunjucksConfig = {
   paths: {
@@ -13,13 +19,13 @@ const nunjucksConfig = {
       normalize: '/css/normalize.css',
       skeleton: '/css/skeleton.css',
       medal: '/css/styles.css',
-      highlight: '/css/highlight/default.css'
+      highlight: highlightCssPath
     }
   },
   index: [] // populated by compile:index task
 };
 
-gulp.task('compile:index', () => {
+gulp.task('compile:index', ['pre-compile'], () => {
   const glob = [];
 
   glob.push(paths.content.publish.root + '/**/*.md');

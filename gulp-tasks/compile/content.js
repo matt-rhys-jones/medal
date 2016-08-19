@@ -16,7 +16,7 @@ const flatten = require('gulp-flatten');
  * 4. Flattens draft and published markdown into a single directory
  * 5. Places the new templates into app/layout/* 
  */
-gulp.task('compile:content', function() {
+gulp.task('compile:content', ['pre-compile'], () => {
   // configure frontMatter to remove the YAML front matter from files
   const frontMatterConfig = {
     remove: true

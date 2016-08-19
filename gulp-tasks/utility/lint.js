@@ -1,4 +1,4 @@
-import paths from '../config/paths.js';
+import paths from '../../config/paths.js';
 
 const gulp = require('gulp');
 const eslint = require('gulp-eslint');

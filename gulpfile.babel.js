@@ -1,5 +1,4 @@
-import './gulp-tasks/clean';
-import './gulp-tasks/lint';
+import './gulp-tasks/pre-compile';
 import './gulp-tasks/compile';
-import './gulp-tasks/test';
-import './gulp-tasks/vendor';
+import './gulp-tasks/utility/lint';
+import './gulp-tasks/utility/test';
