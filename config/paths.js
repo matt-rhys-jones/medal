@@ -4,7 +4,8 @@ export default {
   },
   dist: {
     root: 'dist',
-    css: 'dist/css'
+    css: 'dist/css',
+    images: 'dist/images'
   },
   gulp: {
     root: 'gulp-tasks'
@@ -13,6 +14,7 @@ export default {
     root: 'app',
     layout: 'app/layout',
     css: 'app/css',
+    images: 'app/images',
     articles: 'app/layout/articles'
   },
   articles: {
