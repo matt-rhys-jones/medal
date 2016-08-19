@@ -1,0 +1,35 @@
+{% extends "article.html" %}{% block article %}<h1 id="bugs-from-hell">Bugs From Hell</h1>
+<p>Every now and then software engineers encounter one of <em>those</em> bugs. The one that takes a very specific yet unknown sequence of events to occur, that isn&#39;t captured by tests and has never been identified as an edge case.</p>
+<p>In essence we are tasked with creating a solution to a problem that we didn&#39;t know existed, that we don&#39;t know how to replicate, and that has no obvious cause.</p>
+<p>It&#39;s at this point where head meets desk and we realise we are in unknown territory, but with a good plan we can overcome it.</p>
+<h2 id="plan-of-attack">Plan Of Attack</h2>
+<p>After being in this situation a few times over the years I noticed I was identifying and fixing bugs faster, and had inadvertently developed a little bit of a system to deal with them.</p>
+<p>We all solve problems naturally, and we all do it in different ways, but I&#39;ve found that the following approach works really well for me so I thought I&#39;d share it.</p>
+<h3 id="welcome-distraction">Welcome Distraction</h3>
+<p>It&#39;s impossible to tackle a complex bug unless you&#39;re in the right mind set so make a coffee, plan your dinner for the night or chat with a colleague; whatever relaxes the mind for a couple of minutes. You&#39;ll think straighter, save time and your boss will thank you later.</p>
+<h3 id="use-the-force">Use The Force</h3>
+<p>At this stage code is your enemy, close your IDE (or whatever you&#39;re using), you don&#39;t need it yet. Now you are free to use your experience (&#39;the force&#39;) to conceptualise some possible scenarios that could have led to this problem surfacing.</p>
+<p>While it may sound obvious I like to think along the lines of a slightly adapted user story:</p>
+<blockquote>
+<p>For (problem) to occur the [user/application] may have been trying to (achieve something) by (doing something).</p>
+</blockquote>
+<p>Using the above story makes you ask the right questions very quickly:</p>
+<ul>
+<li>Was this caused by the user or an automated process?</li>
+<li>What was the user/application trying to do?</li>
+<li>How would they have tried to achieve that?</li>
+</ul>
+<p>Asking these questions should help you recreate the issue, and that&#39;s half the battle won.</p>
+<h3 id="be-clear">Be Clear</h3>
+<p>One of the biggest lessons I&#39;ve learnt is that a brain (particularly mine) can only hold so much information and context at any one time. This can lead to incorrectly identifying the cause of the issue, or perhaps only catching part of it.</p>
+<p>Before working on a fix you need to be as sure as possible your solution will a) work and b) is complete. Writing it down or explaining it to somebody who isn&#39;t overly familiar with the codebase will help clarify the details.</p>
+<h3 id="test-first-where-possible-">Test First (Where Possible)</h3>
+<p>There is probably no better time to take a test driven approach, as by now you are likely to have a strong grasp on the expected behaviour of the code. Converting these expectations into a set of test cases will help ensure that you&#39;ve covered all the bases in the solution, communicated the problem to other developers and minimised the risk of regression issues creeping in at a later date.</p>
+<p>Of course there could be some complexities that make writing tests very difficult or perhaps unviable, and that&#39;s completely acceptable. Updating documentation or adding sensible code comments may be useful instead, and this can be decided on a case by case basis.</p>
+<h3 id="be-proactive">Be Proactive</h3>
+<p>So you&#39;ve fixed the problem, written some tests and got it deployed. At this point you might consider the job done, but it&#39;s worth spending just a little time thinking about how this bug creeped into the system in the first place.</p>
+<p>The chances are there will be perfectly valid reasons behind it, perhaps an unexpected edge case or a change to an external API. But maybe this particular issue could have been avoided. Is there a workflow problem? Were there tests? Were they good tests? What was the original acceptance criteria like? Was there a technical limitation or complexity that we didn&#39;t know about at the time, but that we do know about now? Was the code reviewed before it made it into production?</p>
+<p>Asking these types of questions can help identify any room for improvement in the development workflow and prevent bugs of a similar nature occurring in the future. Don&#39;t be afraid to voice your concerns and propose solutions as it could save a lot of time further down the line.</p>
+<h3 id="above-all-else">Above All Else</h3>
+<p>Have fun! Fixing complex bugs is a lot more satisfying than going through the motions with simple fixes, so embrace it as a rewarding experience and something that you can learn from along the way.</p>
+{% endblock %}

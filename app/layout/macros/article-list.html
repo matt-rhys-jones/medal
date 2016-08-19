@@ -1,0 +1,13 @@
+{% from "macros/article-list__article.html" import articleListArticle %}
+
+{% macro articleList(index) %}
+  <div class="article-list">
+    {% for item in index %}
+      {{ articleListArticle(item.path, item.metadata.title, item.metadata.intro) }}
+    {% else %}
+      <div>
+        <p>No content found</p>
+      </div>
+    {% endfor %}
+  </div>
+{% endmacro %}

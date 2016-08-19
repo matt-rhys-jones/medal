@@ -1,7 +1,7 @@
 import './compile/nunjucks';
 import './compile/less';
-import './compile/content';
+import './compile/articles';
 
 const gulp = require ('gulp');
 
-gulp.task('compile', ['compile:nunjucks', 'compile:less', 'compile:content']);
+gulp.task('compile', ['compile:nunjucks', 'compile:less', 'compile:articles']);

@@ -7,20 +7,10 @@ const gulp = require('gulp');
 const nunjucks = require('gulp-nunjucks');
 const data = require('gulp-data');
 const frontMatter = require('gulp-front-matter');
-let highlightCssPath = '';
-
-if (settings.features.highlight.enabled) {
-  highlightCssPath = '/css/highlight/' + settings.features.highlight.theme + '.css';
-}
 
 const nunjucksConfig = {
   paths: {
-    css: {
-      normalize: '/css/normalize.css',
-      skeleton: '/css/skeleton.css',
-      medal: '/css/styles.css',
-      highlight: highlightCssPath
-    }
+    css: '/css/style.min.css'
   },
   index: [] // populated by compile:index task
 };
@@ -28,10 +18,10 @@ const nunjucksConfig = {
 gulp.task('compile:index', ['pre-compile'], () => {
   const glob = [];
 
-  glob.push(paths.content.publish.root + '/**/*.md');
+  glob.push(paths.articles.publish.root + '/**/*.md');
 
   if (process.env.NODE_ENV === 'development') {
-    glob.push(paths.content.draft.root + '/**/*.md');
+    glob.push(paths.articles.draft.root + '/**/*.md');
   }
 
   return gulp.src(glob)
@@ -39,16 +29,17 @@ gulp.task('compile:index', ['pre-compile'], () => {
     .pipe(data((file) => {
       nunjucksConfig.index.push({
         metadata: file.frontMatter,
-        path: '/content/' + path.basename(file.path, '.md') + '.html'
+        path: '/articles/' + path.basename(file.path, '.md') + '.html'
       })
     }))
 });
 
-gulp.task('compile:nunjucks', ['compile:content', 'compile:index'], () => {
+gulp.task('compile:nunjucks', ['compile:articles', 'compile:index'], () => {
   const glob = [];
 
   glob.push(paths.app.layout + '/**/*.html');
   glob.push('!' + paths.app.layout + '/base.html');
+  glob.push('!' + paths.app.layout + '/macros/**/*.html');
 
   nunjucksConfig.index.sort((a, b) => {
     return DateSorter.sortByDateDescending(a.metadata.date, b.metadata.date);

@@ -1,0 +1,119 @@
+{% extends "article.html" %}{% block article %}<h1 id="the-temptation-to-over-engineer">The Temptation To Over Engineer</h1>
+<p>I recently encountered a situation where I needed to deliver a very simple requirement using a Javascript framework. The task was to output a set of <em>hard coded</em> menu items to a page to an authenticated user, not too difficult right?</p>
+<p>It was unlikely these menu items would ever need to change, so a viable solution could have been to include the items in the HTML along with a simple conditional ‘<em>is user authenticated</em>’ check in a controller.</p>
+<p>So that&#39;s precisely what I did. It looked a bit like this in the template.</p>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"/first-link"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"First Title"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"First Icon"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+            First Title
+        <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+
+    ...
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"/last-link"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"Last Title"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"Last Icon"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+            Last Title
+        <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
+</code></pre><p><strong>But</strong> I didn&#39;t like the large amount of duplicated HTML introduced to the template, so I created an array of menu items in my controller and iterated through it.</p>
+<pre><code><span class="xml">var someController = function() </span><span class="hljs-template-variable">{}</span><span class="xml">;
+
+someController.prototype.getItems = function() </span><span class="hljs-template-variable">{
+    return [
+        {
+            itemIcon: 'First Icon',
+            itemTitle: 'First Title',
+            itemHref: '/first-link'
+        }</span><span class="xml">,
+        ...
+        </span><span class="hljs-template-variable">{
+            itemIcon: 'Last Icon',
+            itemTitle: 'Last Title',
+            itemHref: '/last-link'
+        }</span><span class="xml">
+    ];
+};
+
+
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
+    <span class="hljs-comment">&lt;!-- Some Repeater --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span> 
+        <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{link}</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{title}</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{icon}</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+            </span><span class="hljs-template-variable">{title}</span><span class="xml">
+        <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span></span>
+</code></pre><p><strong>This helped</strong> but I wasn&#39;t happy with having a ugly array eating up hundreds of lines in my controller so I created a factory to return it.</p>
+<pre><code><span class="hljs-keyword">var</span> menuItemFactory = {
+    getItems: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> [
+            {
+                itemIcon: <span class="hljs-string">'First Icon'</span>,
+                itemTitle: <span class="hljs-string">'First Title'</span>,
+                itemHref: <span class="hljs-string">'/first-link'</span>
+            },
+            ...
+            {
+                itemIcon: <span class="hljs-string">'Last Icon'</span>,
+                itemTitle: <span class="hljs-string">'Last Title'</span>,
+                itemHref: <span class="hljs-string">'/last-link'</span>
+            }
+        ];
+    }
+};
+</code></pre><p><strong>To tidy it up</strong> I felt it would be much nicer to define what a menu item should look like so I created a typed object for it.</p>
+<pre><code><span class="hljs-keyword">var</span> MenuItem = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(icon, title, href)</span> </span>{
+    <span class="hljs-keyword">this</span>.icon = icon;
+    <span class="hljs-keyword">this</span>.title = title;
+    <span class="hljs-keyword">this</span>.href = href;  
+};
+
+<span class="hljs-keyword">var</span> menuItemFactory = {
+    getItems: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> [
+            <span class="hljs-keyword">new</span> MenuItem(<span class="hljs-string">'First Icon'</span>, <span class="hljs-string">'/first-link'</span>, <span class="hljs-string">'First Title'</span>),
+            ...
+            <span class="hljs-keyword">new</span> MenuItem(<span class="hljs-string">'Last Icon'</span>, <span class="hljs-string">'/last-link'</span>, <span class="hljs-string">'Last Title'</span>),
+        ];
+    }
+};
+</code></pre><p><strong>For the sake of completeness</strong> I added a test to check that the factory was returning an array of MenuItem objects.</p>
+<pre><code>describe('a rather unnecessary test', function() {
+    it('should<span class="hljs-built_in"> return </span>an<span class="hljs-built_in"> array </span>of MenuItems', function() {})
+});
+</code></pre><p><strong>Finally</strong> I injected the factory into my controller and called it to get the array of items.</p>
+<pre><code><span class="hljs-keyword">var</span> someController = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(menuItemFactory)</span> </span>{
+    <span class="hljs-keyword">this</span>.menuItemFactory = menuItemFactory;
+};
+
+someController.prototype.getItems = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.menuItemFactory.getItems();
+};
+</code></pre><p>While this is a somewhat contrived example (although worryingly not far from the end result), at this point I was pretty happy with my work. I had removed duplication, decoupled business logic from the view and used the factory pattern to create the items in case I needed them anywhere else.</p>
+<h2 id="really-">Really?</h2>
+<p>About an hour later I started to realise that I <em>may</em> have gone overboard with the abstraction so I asked myself a couple of questions:</p>
+<ol>
+<li><p>Does having a factory returning typed ‘menuItem’ objects make the solution easier to maintain?</p>
+</li>
+<li><p>Does the new solution offer better performance and speed versus the original solution?</p>
+</li>
+</ol>
+<p>Well, given how simple the original requirement was, the answer to both questions is arguably &quot;no&quot;. So <em>why</em> did I do it?</p>
+<h2 id="applying-common-sense">Applying Common Sense</h2>
+<p>These are just hard coded menu items, nothing more. Does it really need a typed object, factory and tests?</p>
+<blockquote>
+<p>I had inadvertently introduced complexity to address a very simple problem</p>
+</blockquote>
+<p>In a genuine effort to improve maintainability I had inadvertently introduced complexity to address a very simple problem. In fact, it wasn’t even really a problem. </p>
+<p>While this is an extreme example, it shows how easy it is to over engineer.  I&#39;m not the only person to make this type of mistake, and many of us are still on the fence when it comes to abstraction over function.</p>
+<blockquote>
+<p>in the vast majority of cases abstractions are entirely justified...but there are exceptions to the rule</p>
+</blockquote>
+<p>Applying common sense to our work sounds like an obvious thing to say, but sometimes we become focused on what we feel is taking the ‘right’ approach rather than keeping it simple. In the vast majority of cases abstractions are entirely justified, but just like with anything else, there are exceptions to the rule. </p>
+<p>Abstraction typically comes at the cost of performance, which in many cases is a fair trade off if the end result is easier to maintain and extend. But it’s always worth asking <em>why</em> we need to go down a particular route rather than doing so out of habit or because we assume it’s the right thing to do.</p>
+{% endblock %}

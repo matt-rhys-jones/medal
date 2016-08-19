@@ -16,7 +16,7 @@ const flatten = require('gulp-flatten');
  * 4. Flattens draft and published markdown into a single directory
  * 5. Places the new templates into app/layout/* 
  */
-gulp.task('compile:content', ['pre-compile'], () => {
+gulp.task('compile:articles', ['pre-compile'], () => {
   // configure frontMatter to remove the YAML front matter from files
   const frontMatterConfig = {
     remove: true
@@ -24,23 +24,23 @@ gulp.task('compile:content', ['pre-compile'], () => {
 
   // tell marked parser to use highlightjs when parsing into HTML
   const markedConfig = {
-    highlight: (content) => {
-      return highlight.highlightAuto(content).value;
+    highlight: (article) => {
+      return highlight.highlightAuto(article).value;
     }
   };
 
   const glob = [];
 
   if (process.env.NODE_ENV === 'development') {
-    glob.push(paths.content.draft.root + '/**/*.md');
+    glob.push(paths.articles.draft.root + '/**/*.md');
   }
 
-  glob.push(paths.content.publish.root + '/**/*.md');
+  glob.push(paths.articles.publish.root + '/**/*.md');
 
   return gulp.src(glob)
     .pipe(frontMatter(frontMatterConfig))
     .pipe(marked(markedConfig))
     .pipe(wrap('{% extends "article.html" %}{% block article %}<%= contents %>{% endblock %}'))
     .pipe(flatten())
-    .pipe(gulp.dest('app/layout/content'));
+    .pipe(gulp.dest('app/layout/articles'));
 });

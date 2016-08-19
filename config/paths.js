@@ -13,14 +13,14 @@ export default {
     root: 'app',
     layout: 'app/layout',
     css: 'app/css',
-    compiledContent: 'app/layout/content'
+    articles: 'app/layout/articles'
   },
-  content: {
+  articles: {
     draft: {
-      root: 'content/draft'
+      root: 'articles/draft'
     },
     publish: {
-      root: 'content/publish'
+      root: 'articles/publish'
     }
   }
 }

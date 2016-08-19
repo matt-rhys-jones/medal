@@ -1,0 +1,13 @@
+{% from 'macros/container.html' import container %}
+
+{% macro content() %}
+<div class="content">
+  {% call container() %}
+    <div class="row">
+        <div class="twelve columns">
+          {{ caller() }}
+        </div>
+    </div>
+  {% endcall %}
+</div>
+{% endmacro %}

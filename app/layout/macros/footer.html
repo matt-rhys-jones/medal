@@ -1,0 +1,11 @@
+{% from 'macros/container.html' import container %}
+
+{% macro footer() %}
+<footer class="footer">
+  {% call container() %}
+    <div class="row">
+      <span class="footer__brand">Made With Medal</span>
+    </div>
+  {% endcall %}
+</footer>
+{% endmacro %}

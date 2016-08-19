@@ -1,0 +1,21 @@
+{% from 'macros/container.html' import container %}
+{% from 'macros/primary-nav.html' import primaryNav %}
+
+{% macro header() %}
+<header class="header">
+  {% call container() %}
+    <div class="row">
+      <div class="header__branding five columns">
+        <span class="header__brand">
+          <a href="/index.html" title="home">Medal</a>
+        </span>
+        <span class="header__tag">Minimal ES6 Static Blog Generator</span>
+      </div>
+
+      <nav class="header__nav seven columns">
+        {{ primaryNav() }}
+      </nav>
+    </div>
+  {% endcall %}
+</header>
+{% endmacro %}
