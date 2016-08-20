@@ -15,7 +15,8 @@ export default {
     layout: 'app/layout',
     css: 'app/css',
     images: 'app/images',
-    articles: 'app/layout/articles'
+    articles: 'app/layout/articles',
+    tags: 'app/layout/tags'
   },
   articles: {
     draft: {

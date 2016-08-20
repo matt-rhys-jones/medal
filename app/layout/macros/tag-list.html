@@ -1,0 +1,11 @@
+{% macro tagList(tags) %}
+  <div class="tag-list">
+    {% for tag in tags %}
+        {{ tag }}
+    {% else %}
+      <div>
+        <p>No content found</p>
+      </div>
+    {% endfor %}
+  </div>
+{% endmacro %}

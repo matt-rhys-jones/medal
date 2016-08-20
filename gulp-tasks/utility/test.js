@@ -8,7 +8,7 @@ gulp.task('test:js', function (done) {
   process.env.NODE_ENV = 'test';
 
   new Server({
-    configFile: __dirname + '/../karma.conf.js',
+    configFile: __dirname + '/../../karma.conf.js',
     singleRun: true
   }, () => {
     process.env.NODE_ENV = env;
@@ -20,7 +20,7 @@ gulp.task('test:js:tdd', function (done) {
   process.env.NODE_ENV = 'test';
 
   new Server({
-    configFile: __dirname + '/../karma.conf.js',
+    configFile: __dirname + '/../../karma.conf.js',
     singleRun: false
   }, () => {
     process.env.NODE_ENV = env;

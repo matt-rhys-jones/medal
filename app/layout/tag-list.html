@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% from "macros/tag-list.html" import tagList %}
+
+{% block content %}
+  <h1>Tags</h1>
+  {{ tagList(tags) }}
+{% endblock %}

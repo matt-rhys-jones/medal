@@ -1,9 +1,25 @@
 {% from "macros/article-list__article.html" import articleListArticle %}
 
-{% macro articleList(index) %}
+{% macro articleList(index, tag = '') %}
   <div class="article-list">
-    {% for item in index %}
-      {{ articleListArticle(item.path, item.metadata.title, item.metadata.intro) }}
+    {% set shouldRenderArticle = false %}
+
+    {% for item in index|sort('True', false, 'epoch') %}
+      {% if tag == '' %}
+        {% set shouldRenderArticle = true %}
+      {% else %}
+        {# If a tag has been passed check that at least one tag matches passed tag #}
+        {% set shouldRenderArticle = false %}
+        {% for itemTag in item.metadata.tags %}
+          {% if itemTag == tag %}
+            {% set shouldRenderArticle = true %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+      {% if shouldRenderArticle %}
+        {{ articleListArticle(item.path, item.metadata.title, item.metadata.intro) }}
+      {% endif %}
     {% else %}
       <div>
         <p>No content found</p>

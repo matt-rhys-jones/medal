@@ -1,6 +1,7 @@
 import paths from '../../config/paths';
 import settings from '../../config/settings';
-import DateSorter from '../../medal/js/modules/date-sorter/date-sorter';
+import nunjucksConfig from '../../medal/js/models/nunjucks-config';
+import TagAggregator from '../../medal/js/modules/tag-aggregator/tag-aggregator';
 
 const path = require('path');
 const gulp = require('gulp');
@@ -8,12 +9,9 @@ const nunjucks = require('gulp-nunjucks');
 const data = require('gulp-data');
 const frontMatter = require('gulp-front-matter');
 
-const nunjucksConfig = {
-  paths: {
-    css: '/css/min/style.min.css'
-  },
-  index: [] // populated by compile:index task
-};
+const fs = require('fs');
+
+nunjucksConfig.paths.css = '/css/min/style.min.css';
 
 gulp.task('compile:index', ['pre-compile'], () => {
   const glob = [];
@@ -29,6 +27,7 @@ gulp.task('compile:index', ['pre-compile'], () => {
     .pipe(data((file) => {
       nunjucksConfig.index.push({
         metadata: file.frontMatter,
+        epoch: new Date(file.frontMatter.date).getTime(),
         path: '/articles/' + path.basename(file.path, '.md') + '.html'
       })
     }))
@@ -41,9 +40,17 @@ gulp.task('compile:nunjucks', ['compile:articles', 'compile:index'], () => {
   glob.push('!' + paths.app.layout + '/base.html');
   glob.push('!' + paths.app.layout + '/macros/**/*.html');
 
-  nunjucksConfig.index.sort((a, b) => {
-    return DateSorter.sortByDateDescending(a.metadata.date, b.metadata.date);
-  });
+  // Tags Task
+  nunjucksConfig.tags = TagAggregator.aggregateTagsFromArticleIndex(nunjucksConfig.index);
+  
+  fs.mkdirSync('app/layout/tags');
+  for (let i = 0; i < nunjucksConfig.tags.length; i++) {
+    const tagName = nunjucksConfig.tags[i];
+    const tagURI = encodeURI(nunjucksConfig.tags[i] + '.html');
+    const filename = 'app/layout/tags/' + tagURI;
+    fs.writeFileSync(filename, '{% extends "tag.html" %}{% from "macros/article-list.html" import articleList %}{% block tag %}<h1>' + tagName + '</h1>{{ articleList(index, "' + tagName + '") }}{% endblock %}');
+  }
+  // End Tags Task
 
   gulp.src(glob)
     .pipe(nunjucks.compile(nunjucksConfig))
