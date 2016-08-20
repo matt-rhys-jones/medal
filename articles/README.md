@@ -1,6 +1,12 @@
-# Publishing Articles
+# Adding Articles
 
-Please note that *only articles in the 'publixh' folder* are used when generating the site. To include articles 
+Create two sub directories here, `draft` and `publish` which you can add your markdown content to. 
+
+These directories should not be versioned.
+
+# Draft vs Publish
+
+Please note that *only articles in the 'publish' folder* are used when generating the site. To include articles 
 in the draft folder NODE_ENV will need to be set to `development`.
 
 This can be done by typing the following commands in the same terminal window as the build task is being run on:
