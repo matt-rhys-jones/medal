@@ -1,7 +1,8 @@
 module.exports = function(config) {
   config.set({
     preprocessors: {
-      'medal/js/modules/**/*.js': ['babel'],
+      'config/**/*.js': ['babel'],
+      'medal/js/src/**/*.js': ['babel'],
       'medal/js/tests/**/*.spec.js': ['babel']
     },
     babelPreprocessor: {
@@ -17,7 +18,8 @@ module.exports = function(config) {
     browsers: ['PhantomJS'],
     frameworks: ['mocha', 'chai'],
     files: [
-      'medal/js/modules/**/*.js',
+      'config/**/*.js',
+      'medal/js/src/**/*.js',
       'medal/js/tests/**/*.spec.js'
     ]
   });

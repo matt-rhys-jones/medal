@@ -25,5 +25,13 @@ export default {
     publish: {
       root: 'articles/publish'
     }
+  },
+  template: {
+    css: '/css/min/style.min.css',
+    articles: '/articles',
+    tags: '/tags'
+  },
+  medal: {
+    root: 'medal'
   }
 }

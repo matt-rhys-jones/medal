@@ -5,6 +5,7 @@ const eslint = require('gulp-eslint');
 const glob = [];
 
 glob.push(paths.app.root + '/**/*.js');
+glob.push(paths.medal.root + '/**/*.js');
 glob.push(paths.gulp.root + '/**/*.js');
 glob.push(paths.config.root + '/**/*.js');
 glob.push('!node_modules/**');

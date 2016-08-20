@@ -1,11 +1,10 @@
 {% macro tagList(tags) %}
-  <div class="tag-list">
+    <ul class="tag-list">
+      {{ tags | dump }}
     {% for tag in tags %}
-        {{ tag }}
-    {% else %}
-      <div>
-        <p>No content found</p>
-      </div>
+        <li class="tag-list__tag">
+          <a class="tag-list__tag-link" href="{{ tag.uri }}" title="{{ tag.name }}">{{ tag.name }}</a>
+        </li>
     {% endfor %}
-  </div>
+    </ul>
 {% endmacro %}
