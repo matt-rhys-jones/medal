@@ -1,9 +1,8 @@
 {% macro tagList(tags) %}
     <ul class="tag-list">
-      {{ tags | dump }}
     {% for tag in tags %}
         <li class="tag-list__tag">
-          <a class="tag-list__tag-link" href="{{ tag.uri }}" title="{{ tag.name }}">{{ tag.name }}</a>
+          <a class="tag-list__tag-link" href="{{ tag.uri }}" title="{{ tag.name | capitalize }}">{{ tag.name | capitalize }}</a>
         </li>
     {% endfor %}
     </ul>
