@@ -1,4 +1,5 @@
 # Compiled #
 dist
 node_modules
-articles
+articles/draft
+articles/publish
