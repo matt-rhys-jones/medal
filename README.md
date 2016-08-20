@@ -10,7 +10,7 @@ Simple Markdown Static Site Generator written in ES6.
 - `./app` - contains layouts, images and CSS for the site being generated
 - `./articles` - contains markdown articles for publishing to the site, draft articles only get shown in development mode
 = `./articles/draft` - create this folder yourself and put draft markdown articles here
-- `./articles/publish` - create this folder yourself and put articles ready to publish here
+= `./articles/publish` - create this folder yourself and put articles ready to publish here
 - `./config` - contains configuration used by gulp tasks and medal code during builds
 - `./dist` - contains the production ready code for deployment
 - `./gulp-tasks` - a suite of gulp tasks used in order to build the site
