@@ -6,19 +6,21 @@ import ArticleMetadata from '../../models/article-metadata';
  */
 import paths from '../../../../../config/paths';
 
+const extensionLength = 3;
 export default class ArticleFactory {
   /**
-   * @param {File} file
+   * @param {string} fileName
+   * @param {object} file
    * 
    * @returns {Article}
    */
-  static createArticle(file) {
+  static createArticle(fileName, file) {
     if (!isValidFile(file)) {
       throw new Error('Unable to create article, invalid file');
     }
 
     const epoch = generateEpochFromDateString(file.frontMatter.date);
-    const articleURI = generateURIFromFilePath(file.path);
+    const articleURI = generateURIFromFilePath(fileName);
     const articleMetadata = new ArticleMetadata(
       file.frontMatter.title,
       file.frontMatter.intro,
@@ -30,20 +32,34 @@ export default class ArticleFactory {
   }
 }
 
+/**
+ * @param {object} file
+ * 
+ * @returns {boolean}
+ */
 function isValidFile(file) {
   return Boolean(
     file.frontMatter.title &&
     file.frontMatter.intro &&
-    file.frontMatter.date &&
-    file.path
+    file.frontMatter.date
   )
 }
 
+/**
+ * @param {string} dateString
+ * 
+ * @returns {number}
+ */
 function generateEpochFromDateString(dateString) {
   return new Date(dateString).getTime();
 }
 
-
+/**
+ * @param {string} path
+ * 
+ * @returns {string}
+ */
 function generateURIFromFilePath(path) {
-  return paths.template.articles + '/' + encodeURI(path) + '.html';
+  path = path.slice(0, -extensionLength);
+  return paths.template.articles + '/' + path + '.html';
 }

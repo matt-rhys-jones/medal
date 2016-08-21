@@ -4,20 +4,20 @@ import paths from '../../../../../../../config/paths';
 describe('Article Factory', function() {
   describe('When creating an Article from a file object', function() {
     it('Should return an Article object with the correct values', function() {
+      const mockFileName = 'mockFilePath.md';
       const mockFile = {
         frontMatter: {
           title: 'mockTitle',
           intro: 'mockIntro',
           date: '2015-05-01',
           tags: ['mockTag1', 'mockTag2']
-        },
-        path: 'mockFilePath'
+        }
       }
 
       const expectedMetadata = mockFile.frontMatter;
       const expectedEpoch = new Date(mockFile.frontMatter.date).getTime();
       const expectedUri = paths.template.articles + '/mockFilePath.html';
-      const actualArticle = ArticleFactory.createArticle(mockFile);
+      const actualArticle = ArticleFactory.createArticle(mockFileName, mockFile);
 
       expect(actualArticle.metadata).to.eql(expectedMetadata);
       expect(actualArticle.epoch).to.eql(expectedEpoch);
@@ -27,6 +27,7 @@ describe('Article Factory', function() {
 
   describe('When creating an Article from a file object without tags', function() {
     it('Should return an Article object with an empty tags array', function() {
+      const mockFileName = 'mockFilePath.md';
       const mockFile = {
         frontMatter: {
           title: 'mockTitle',
@@ -39,13 +40,14 @@ describe('Article Factory', function() {
       const expectedMetadata = mockFile.frontMatter;
       expectedMetadata.tags = [];
 
-      const actualArticle = ArticleFactory.createArticle(mockFile);
+      const actualArticle = ArticleFactory.createArticle(mockFileName, mockFile);
       expect(actualArticle.metadata).to.eql(expectedMetadata);
     });
   });
 
   describe('When creating an Article from an invalid file object', function() {
     it('Should throw an error', function() {
+      const mockFileName = 'mockFilePath.md';
       const mockFile = {
         frontMatter: {
           invalidTitle: 'mockTitle',
@@ -57,7 +59,7 @@ describe('Article Factory', function() {
       }
 
       function shouldThrow() {
-        ArticleFactory.createArticle(mockFile);
+        ArticleFactory.createArticle(mockFileName, mockFile);
       }
 
       expect(shouldThrow).to.throw();
@@ -66,8 +68,9 @@ describe('Article Factory', function() {
 
   describe('When creating an Article without any file object', function() {
     it('Should throw an error', function() {
+      const mockFileName = 'mockFilePath.md';
       function shouldThrow() {
-        ArticleFactory.createArticle();
+        ArticleFactory.createArticle(mockFileName);
       }
 
       expect(shouldThrow).to.throw();

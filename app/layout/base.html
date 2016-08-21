@@ -16,7 +16,7 @@
       {{ header() }}
     {% endblock %}
 
-    {% call content() %}
+    {% call content(index, tags) %}
       {% block content %}
       {% endblock %}
     {% endcall %}

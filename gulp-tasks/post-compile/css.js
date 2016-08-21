@@ -9,10 +9,8 @@ const concat = require('gulp-concat');
 gulp.task('post-compile:css', ['compile'], () => {
   const glob = [];
 
-  glob.push(paths.dist.css + '/normalize.css');
-  glob.push(paths.dist.css + '/skeleton.css');
-  glob.push(paths.dist.css + '/styles.css');
-  glob.push(paths.dist.css + '/highlight/*.css');
+  glob.push(paths.dist.css + '/**/*.css');
+  glob.push(paths.dist.css + '/highlight/**/*.css');
 
   if (process.env.NODE_ENV === 'production') {
     return gulp.src(glob)

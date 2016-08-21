@@ -29,7 +29,7 @@ gulp.task('compile:templates:articles', ['pre-compile'], () => {
   const articleTemplateWrapper = '{% extends "article.html" %}{% block article %}<%= contents %>{% endblock %}';
 
   function indexArticle(file) {
-    articleIndex.push(ArticleFactory.createArticle(file));
+    articleIndex.push(ArticleFactory.createArticle(path.basename(file.path), file));
   }
 
   function indexTags(file) {
@@ -57,7 +57,7 @@ gulp.task('compile:templates:articles', ['pre-compile'], () => {
     try {
       fs.accessSync(path);
     } catch(e) {
-      fs.writeFileSync(path,content);
+      fs.writeFileSync(path, content);
     }
   }
   

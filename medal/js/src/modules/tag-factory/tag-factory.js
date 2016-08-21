@@ -15,10 +15,20 @@ export default class TagFactory {
   }
 }
 
+/**
+ * @param {string} tagName
+ * 
+ * @returns {string}
+ */
 function generateTagUri(tagName) {
   return paths.template.tags + '/' + encodeURI(tagName) + '.html';
 }
 
+/**
+ * @param {string} tagName
+ * 
+ * @returns {string}
+ */
 function generateTagFilename(tagName) {
   return paths.template.tags + '/' + tagName + '.html'
 }

@@ -6,6 +6,7 @@ export default class Tag {
 
   /**
    * @param {string} uri
+   * @param {string} filename
    * @param {string} name
    */
   constructor(uri, filename, name) {

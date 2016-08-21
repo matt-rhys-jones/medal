@@ -1,6 +1,6 @@
-{% macro articleListArticle(path, title, intro) %}
+{% macro articleListArticle(uri, title, intro) %}
 <article class="article-list__article">
-    <h2 class="article-list__article_title"><a href="{{ path }}" title="{{ title }}">{{ title }}</a></h2>
+    <h2 class="article-list__article_title"><a href="{{ uri }}" title="{{ title }}">{{ title }}</a></h2>
     <p class="article-list__article_intro">{{ intro }}</p>
 </article>
 {% endmacro %}

@@ -18,7 +18,7 @@
       {% endif %}
 
       {% if shouldRenderArticle %}
-        {{ articleListArticle(item.path, item.metadata.title, item.metadata.intro) }}
+        {{ articleListArticle(item.uri, item.metadata.title, item.metadata.intro) }}
       {% endif %}
     {% else %}
       <div>
