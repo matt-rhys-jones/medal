@@ -3,3 +3,4 @@ dist
 node_modules
 articles/draft/*
 articles/publish/*
+config/deploy.js
