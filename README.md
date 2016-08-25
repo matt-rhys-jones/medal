@@ -1,15 +1,27 @@
 # Medal
-Simple Markdown Static Site Generator written in ES6.
+
+Lightweight Markdown Static Site Generator written with ES6, Node, Gulp and Nunjucks. **Medal is still in development, use at your own risk!**
 
 # Prerequisites
 - NVM (optional)
-- Node v4 or above
+- Node 4.x (or later)
+- Gulp (`npm install gulp-cli -g`)
 - HTTP Server (`npm install http-server -g`)
+
+# Installation
+
+```
+git clone https://github.com/matt-rhys-jones/medal.git
+npm install
+cp config/deploy.dist.js config/deploy.js
+```
+
+You will need to create `articles/draft` and `articles/publish` folders. If you do not want articles to be published and only want to view drafts then you should set `NODE_ENV` to `development`.
 
 # Folder Structure
 - `./app` - contains layouts, images and CSS for the site being generated
 - `./articles` - contains markdown articles for publishing to the site, draft articles only get shown in development mode
-= `./articles/draft` - create this folder yourself and put draft markdown articles here
+= `./articles/draft` - create this folder yourself and put draft markdown articles here (only used if `NODE_ENV` is set to `development`)
 = `./articles/publish` - create this folder yourself and put articles ready to publish here
 - `./config` - contains configuration used by gulp tasks and medal code during builds
 - `./dist` - contains the production ready code for deployment
@@ -19,7 +31,7 @@ Simple Markdown Static Site Generator written in ES6.
 
 # Gulp Tasks
 - `lint` - runs linting against JS files
-- `test` - tests all javascript (including site and medal app javascript)
+- `test` - tests all javascript (including client site and medal app javascript)
 - `build` - builds the site
 
 # Preview
