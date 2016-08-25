@@ -1,0 +1,28 @@
+{% from 'macros/header.html' import header %}
+{% from 'macros/content.html' import content %}
+{% from 'macros/footer.html' import footer %}
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    {% block head %}
+      <link rel="stylesheet" href="{{ paths.css }}" />
+      <base href="/" />
+    {% endblock %}
+  <head>
+  <body>
+    {% block header %}
+      {{ header() }}
+    {% endblock %}
+
+    {% call content(index, tags) %}
+      {% block content %}
+      {% endblock %}
+    {% endcall %}
+
+    {% block footer %}
+      {{ footer() }} 
+    {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,20 @@
+{% from 'macros/container.html' import container %}
+{% from "macros/tag-list.html" import tagList %}
+
+{% macro content(index, tags) %}
+<div class="content">
+  {% call container() %}
+    <div class="row">
+        <div class="nine columns">
+          {{ caller() }}
+        </div>
+        <div class="three columns">
+          <div class="content__tag-container">
+            <span class="content__tag-title">Tags</span>
+            {{ tagList(tags) }}
+          </div>
+        </div>
+    </div>
+  {% endcall %}
+</div>
+{% endmacro %}

@@ -1,0 +1,8 @@
+{% from "macros/article-list.html" import articleList %}
+
+{% macro tag(index, tag = '') %}
+  <h1>{{ tag | capitalize }}</h1>
+  <div class="tag">
+    {{ articleList(index, tag) }}
+  </div>
+{% endmacro %}
