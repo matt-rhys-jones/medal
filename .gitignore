@@ -1,6 +1,8 @@
 # Compiled #
 dist
 node_modules
+app/layout/tags/*
+app/layout/articles/*
 articles/draft/*
 articles/publish/*
 config/deploy.js
