@@ -15,16 +15,13 @@ Lightweight Markdown Static Site Generator written with ES6, Node, Gulp and Nunj
 ```
 git clone https://github.com/matt-rhys-jones/medal.git
 npm install
-cp config/deploy.dist.js config/deploy.js
 ```
-
-You will need to create `articles/draft` and `articles/publish` folders. If you do not want articles to be published and only want to view drafts then you should set `NODE_ENV` to `development`.
 
 # Folder Structure
 - `./app` - contains layouts, images and CSS for the site being generated
 - `./articles` - contains markdown articles for publishing to the site, draft articles only get shown in development mode
-- `./articles/draft` - create this folder yourself and put draft markdown articles here (only used if `NODE_ENV` is set to `development`)
-- `./articles/publish` - create this folder yourself and put articles ready to publish here
+- `./articles/draft` - put draft markdown articles here (only used if `NODE_ENV` is set to `development`)
+- `./articles/publish` - put articles ready to publish here
 - `./config` - contains configuration used by gulp tasks and medal code during builds
 - `./dist` - contains the production ready code for deployment
 - `./gulp-tasks` - a suite of gulp tasks used in order to build the site
