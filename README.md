@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/matt-rhys-jones/medal.svg?branch=master)](https://travis-ci.org/matt-rhys-jones/medal)
+
 # Medal
 
 Lightweight Markdown Static Site Generator written with ES6, Node, Gulp and Nunjucks. **Medal is still in development, use at your own risk!**
@@ -5,7 +7,7 @@ Lightweight Markdown Static Site Generator written with ES6, Node, Gulp and Nunj
 # Prerequisites
 - NVM (optional)
 - Node 4.x (or later)
-- Gulp (`npm install gulp-cli -g`)
+- Gulp (`npm install gulp -g`)
 - HTTP Server (`npm install http-server -g`)
 
 # Installation
