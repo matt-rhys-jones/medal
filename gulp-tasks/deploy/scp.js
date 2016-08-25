@@ -18,7 +18,7 @@ gulp.task('deploy:scp', () => {
 
   return gulp.src(glob)
     .pipe(scp(scpConfig))
-    .on('error', () => {
-      console.log(err);
+    .on('error', (error) => {
+      process.stdout.write(error);
     });
 });

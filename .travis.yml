@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - "4.4"
+before_script:
+  - "export NODE_ENV=production"
+  - "npm install -g gulp"
+  - "cp config/deploy.dist.js config/deploy.js"
+script:
+  - "npm run test"
+  - "npm run lint"

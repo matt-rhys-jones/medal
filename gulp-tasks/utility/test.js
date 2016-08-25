@@ -10,9 +10,12 @@ gulp.task('test:js', function (done) {
   new Server({
     configFile: __dirname + '/../../karma.conf.js',
     singleRun: true
-  }, () => {
+  }, (error) => {
     process.env.NODE_ENV = env;
-    done() 
+    if (error){
+      process.exit(1);
+    }
+    done();
   }).start();
 });
 
