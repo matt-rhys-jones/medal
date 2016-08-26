@@ -1,42 +1,77 @@
 [![Build Status](https://travis-ci.org/matt-rhys-jones/medal.svg?branch=master)](https://travis-ci.org/matt-rhys-jones/medal)
 
-# Medal
+# Medal - ES6 Static Site Generator
 
-Lightweight Markdown Static Site Generator written with ES6, Node, Gulp and Nunjucks. **Medal is still in development, use at your own risk!**
+Lightweight Static Site Generator written with ES6, Node, Gulp and Nunjucks. **Medal is still in development, use at your own risk!**
 
-# Prerequisites
+## Prerequisites
 - NVM (optional)
 - Node 4.x (or later)
 - Gulp (`npm install gulp -g`)
 - HTTP Server (`npm install http-server -g`)
 
-# Installation
+## Installation
 
 ```
 git clone https://github.com/matt-rhys-jones/medal.git
 npm install
 ```
 
-# Folder Structure
+## Getting Started
+
+Medal takes Markdown (with front matter) and converts it to static HTML via Nunjucks templates. The following commands will allow you to add a new article and preview it using http-server.
+
+```bash
+# Install http-server if you do not already have it
+npm install -g http-server
+
+# Set environment to development (so that draft articles are included)
+export NODE_ENV=development
+
+# Add a new article (once the file is created, add front matter and some content - see articles/README.md for more information)
+touch articles/draft/article.md
+
+# Compile the site
+gulp build
+
+# Start server
+http-server dist
+```
+
+To change the layout of the site then modify the Nunjucks templates in `app/layout/` and LESS files in `app/css`. 
+
+## Template Variables
+Running `gulp build` will compile Nunjucks with a configuration object. That configuration object exposes some variables to the Nunjucks templates:
+
+- `{{ index }}` - array of article objects
+  - `{{ index[0].uri }}` - article link
+  - `{{ index[0].epoch }}` - article date epoch
+  - `{{ index[0].metadata }}` - article metadata object, populated by YAML front matter on the relevant Markdown file
+  - `{{ index[0].metadata.title }}` - article title
+  - `{{ index[0].metadata.intro }}` - article intro
+  - `{{ index[0].metadata.tags }}` - array of article tags
+- `{{ tags }}` - distinct array of tags that have been specified across all articles
+- `{{ paths }}` - configuration object that provides paths to compiled assets (e.g. `paths.css` links to the compiled css file)
+
+The simplest way to familiarise yourself with the template variables is to use the Nunjucks filter to debug them e.g. `{{ index | dump }}`. 
+
+The simplest way to add new metadata to an article (e.g. `author`) is to add a new YAML front matter property to a Markdown article (e.g. `author: 'Joe Bloggs')`. This will then be made available in the templates as `{{ index[0].metadata.author }}`.
+
+## Folder Structure
 - `./app` - contains layouts, images and CSS for the site being generated
-- `./articles` - contains markdown articles for publishing to the site, draft articles only get shown in development mode
-- `./articles/draft` - put draft markdown articles here (only used if `NODE_ENV` is set to `development`)
-- `./articles/publish` - put articles ready to publish here
+- `./articles` - contains markdown articles for publishing to the site (articles in `articles/draft` only get shown in development environment)
 - `./config` - contains configuration used by gulp tasks and medal code during builds
 - `./dist` - contains the production ready code for deployment
 - `./gulp-tasks` - a suite of gulp tasks used in order to build the site
 - `./medal` - server side JS that is used to complement the gulp tasks when generating the site
 - `./node_modules` - dependencies
 
-# Gulp Tasks
+## Gulp Tasks
 - `lint` - runs linting against JS files
 - `test` - tests all javascript (including client site and medal app javascript)
 - `build` - builds the site
 
-# Preview
-Run `http-server dist` from the root folder and navigate to http://localhost:8080
-
-# Environments
+## Environments
 Medal utilises Node Environment Variables as part of it's configuration. As an example, development builds will come with 
 sourcemapping enabled, whereas production builds will not.
 
