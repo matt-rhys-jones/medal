@@ -35,11 +35,14 @@ touch articles/draft/article.md
 # Compile the site
 gulp build
 
-# Start server
+# Start server (ordinarily this would serve the site at http://localhost:8080)
 http-server dist
 ```
 
-To change the layout of the site then modify the Nunjucks templates in `app/layout/` and LESS files in `app/css`. 
+## Changing HTML and CSS
+Medal uses Nunjucks to generate static HTML and LESS to generate CSS. The Nunjucks templates can be modified in `app/layout/`, and LESS files in `app/css`. 
+
+The LESS files follow BEM convention, with each block warranting it's own file and typically mirroring the file path of the relevant Nunjucks template file or macro. (e.g. the macro `app/layout/macros/prinary-nav.html` has a correspsonding LESS file in `app/css/medal/macros/primary-nav.less`)
 
 ## Template Variables
 Running `gulp build` will compile Nunjucks with a configuration object. That configuration object exposes some variables to the Nunjucks templates:
