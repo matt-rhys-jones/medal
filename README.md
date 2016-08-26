@@ -13,7 +13,8 @@ Lightweight Static Site Generator written with ES6, Node, Gulp and Nunjucks. **M
 ## Installation
 
 ```
-git clone https://github.com/matt-rhys-jones/medal.git
+git clone https://github.com/matt-rhys-jones/medal.git my-medal-site
+cd my-medal-site
 npm install
 ```
 
