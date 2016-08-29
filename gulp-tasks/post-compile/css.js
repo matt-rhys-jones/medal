@@ -17,7 +17,7 @@ gulp.task('post-compile:css', ['compile'], () => {
       .pipe(minifyCSS())
       .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9'))
       .pipe(concat('style.min.css'))
-      .pipe(gulp.dest('dist/css'));
+      .pipe(gulp.dest('dist/css/min'));
   }
 
   return gulp.src(glob)
