@@ -40,7 +40,7 @@ tags:
 
 ## Extending Front Matter
 
-The Front Matter is ,ade available as `index.item.metadata` in 
+The Front Matter is made available as `index.item.metadata` in 
 the `app\layouts` HTML templates. (For example, the title is `index.item.metadata.title`).
 
 You can add anything you like to the Front Matter and it will be made available to the template engine, just 
